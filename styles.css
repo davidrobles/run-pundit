@@ -1,5 +1,17 @@
 body {
-    background-color: #fffff;
+    background-color: #fafaf8;
+    font-family: "Verdana";
+    font-size: 12px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.6em;
+}
+
+table {
+    border: 1px solid #b0b2a3;
+    padding: 0px;
 }
 
 tr:hover {
@@ -8,6 +20,17 @@ tr:hover {
 
 td, th {
     width: 150px;
+    height: 30px;
+}
+
+thead tr {
+    display: block;
+    background-color: #494949
+}
+
+thead tr th {
+    color: #fafaf8;
+    font-weight: normal;
 }
 
 tbody {
@@ -16,6 +39,10 @@ tbody {
     display: block;
 }
 
-thead tr {
-    display: block;
+tbody tr td {
+    text-align: center;
+}
+
+tbody tr.alternate {
+    background-color: #cecece;
 }

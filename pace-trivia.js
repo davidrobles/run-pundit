@@ -59,14 +59,17 @@ var minPace = 240,
     maxPace = 779;
 
 var showAll = function() {
-    document.write("Race Times for a Given Pace per Kilometer");
     document.write("<table>");
     document.write("<thead>");
     document.write("<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th><th>5K</th><th>10K</th><th>HALF-MARATHON</th><th>MARATHON</th></tr>");
     document.write("</thead>");
     document.write("<tbody>");
     for (var secs = minPace; secs <= maxPace; secs++) {
-        document.write("<tr>");
+        if (secs % 2 === 0) {
+            document.write("<tr>");
+        } else {
+            document.write('<tr class="alternate">');
+        }
         document.write("<td>" + secsToMins(secs) + "</td>");
         document.write("<td>" + secsToMins(convertMiPaceToKm(secs)) + "</td>");
         document.write("<td>" + distanceAndPaceToDuration(CD["5K"], convertMiPaceToKm(secs) / 1000) + "</td>");
