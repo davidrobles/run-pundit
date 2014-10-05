@@ -2,6 +2,8 @@ body {
     background-color: #e1e4ed;
     font-family: "Verdana";
     font-size: 12px;
+    width: 900px;
+    margin: 0 auto;
 }
 
 h1 {

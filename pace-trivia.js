@@ -83,3 +83,30 @@ var showAll = function() {
 };
 
 showAll();
+
+// Peter Riegel formula
+var convert = function(distance1, time1, distance2) {
+    return time1 * Math.pow(distance2 / distance1, 1.06);
+};
+
+var str = "<table>";
+str += "<thead>";
+str +="<tr><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>";
+str += "</thead>";
+str += "<tbody>";
+for (var secs = 700; secs < 2500; secs += 5) {
+    if (secs % 2 === 0) {
+        str += "<tr>";
+    } else {
+        str += '<tr class="alternate">';
+    }
+    str += "<td>" + secsToMins(secs) + "</td>";
+    str += "<td>" + secsToMins(convert(5000, secs, CD["10K"])) + "</td>";
+    str += "<td>" + secsToMins(convert(5000, secs, CD["HM"])) + "</td>";
+    str += "<td>" + secsToMins(convert(5000, secs, CD["M"])) + "</td>";
+    str += "</tr>";
+}
+str += "</tbody>";
+str += "</table>";
+var racePredictionDiv = document.getElementById("race-prediction");
+racePredictionDiv.innerHTML = str;
