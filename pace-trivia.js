@@ -61,7 +61,7 @@ var minPace = 240,
 var showAll = function() {
     document.write("<table>");
     document.write("<thead>");
-    document.write("<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th><th>5K</th><th>10K</th><th>HALF-MARATHON</th><th>MARATHON</th></tr>");
+    document.write("<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>");
     document.write("</thead>");
     document.write("<tbody>");
     for (var secs = minPace; secs <= maxPace; secs++) {
