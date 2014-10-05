@@ -1,5 +1,5 @@
 body {
-    background-color: #fafaf8;
+    background-color: #e1e4ed;
     font-family: "Verdana";
     font-size: 12px;
 }
@@ -13,6 +13,7 @@ table {
     border: 1px solid #b0b2a3;
     padding: 0px;
     border-spacing: 0;
+    background-color: #ffffff;
 }
 
 tr:hover td {
