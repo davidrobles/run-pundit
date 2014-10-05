@@ -8,19 +8,7 @@
         return i * 1609.344;
     }
 
-    var Distance = function(meters) {
-        this.meters = meters;
-    };
-
-    Distance.prototype.toKM = function() {
-        return this.meters / 1000;
-    };
-
-    Distance.prototype.toMI = function() {
-    };
-
     // Use seconds and meters for everything
-
 
     var convertKmPaceToMi = function(secondsPerKm) {
         return secondsPerKm * 1.60934;
@@ -31,9 +19,12 @@
     };
 
     var secsToMins = function(seconds) {
-        var hours = Math.floor(seconds / (60 * 60)),
+        var hours = Math.floor(seconds / 3600),
             mins  = Math.floor(seconds / 60) % 60,
             secs  = Math.round(seconds % 60);
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
         if (mins < 10) {
             mins = "0" + mins;
         }
