@@ -12,6 +12,7 @@ h1 {
 table {
     border: 1px solid #b0b2a3;
     padding: 0px;
+    border-spacing: 0;
 }
 
 tr:hover {
