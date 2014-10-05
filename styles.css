@@ -1,0 +1,21 @@
+body {
+    background-color: #fffff;
+}
+
+tr:hover {
+    background-color: #ffffcc;
+}
+
+td, th {
+    width: 150px;
+}
+
+tbody {
+    height: 400px;
+    overflow: auto;
+    display: block;
+}
+
+thead tr {
+    display: block;
+}
