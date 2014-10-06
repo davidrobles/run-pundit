@@ -1,9 +1,12 @@
 (function() {
 
-    var Distance = function() {
+    var Distance = function(options) {
+        this.name = options.name;
+        this.len = options.len;
     };
 
     Distance.prototype.toMeters = function() {
+        return this.len;
     };
 
     function getMiles(i) {
@@ -48,10 +51,22 @@
 
     // in meters
     var CD = {
-        "5K":    5000,
-        "10K":  10000,
-        "HM":   21097.5,
-        "M":    42195
+        "5K": new Distance({
+            name: "5K",
+            len: 5000
+        }),
+        "10K": new Distance({
+            name: "10K",
+            len: 10000
+        }),
+        "HM": new Distance({
+            name: "Half Marathon",
+            len: 21097.5
+        }),
+        "M": new Distance({
+            name: "Marathon",
+            len: 42195
+        })
     };
 
     var minPace = 240,
@@ -66,15 +81,18 @@
     // Table 1 //
     /////////////
 
-    var RaceTimesPaceTable = function() {
-
+    var RaceTimesPaceTable = function(options) {
+        this.distances = options.distances
     };
 
     RaceTimesPaceTable.prototype.render = function() {
         var str = "";
         str += "<table>";
         str += "<thead>";
-        str += "<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>";
+        str += "<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th>";
+        for (var i = 0; i < this.distances.length; i++) {
+            str += "<th>" + this.distances[i].name + "</th>";
+        }
         str += "</thead>";
         str += "<tbody>";
         for (var secs = minPace; secs <= maxPace; secs++) {
@@ -85,10 +103,10 @@
             }
             str += "<td>" + formatTime(secs) + "</td>";
             str += "<td>" + formatTime(convertMiPaceToKm(secs)) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["5K"], convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["10K"], convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["HM"], convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["M"], convertMiPaceToKm(secs) / 1000) + "</td>";
+            str += "<td>" + distanceAndPaceToDuration(CD["5K"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+            str += "<td>" + distanceAndPaceToDuration(CD["10K"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+            str += "<td>" + distanceAndPaceToDuration(CD["HM"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+            str += "<td>" + distanceAndPaceToDuration(CD["M"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
             str += "</tr>";
         }
         str += "</tbody>";
@@ -118,9 +136,9 @@
                 str += '<tr class="alternate">';
             }
             str += "<td>" + formatTime(secs) + "</td>";
-            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["10K"])) + "</td>";
-            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["HM"])) + "</td>";
-            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["M"])) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["10K"].toMeters())) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["HM"].toMeters())) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["M"].toMeters())) + "</td>";
             str += "</tr>";
         }
         str += "</tbody>";
@@ -133,6 +151,10 @@
         stopDuration: 2500
     });
     document.getElementById("race-prediction").innerHTML = racePredictionTable.render();
-    document.getElementById("race-times-pace").innerHTML = new RaceTimesPaceTable().render();
+
+    var raceTimesPaceTable = new RaceTimesPaceTable({
+        distances: [CD["5K"], CD["10K"], CD["HM"], CD["M"]]
+    });
+    document.getElementById("race-times-pace").innerHTML = raceTimesPaceTable.render();
 
 })();
