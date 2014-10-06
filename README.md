@@ -1,9 +1,9 @@
-Running Pace Charts
-===================
+Run Pundit
+==========
 
-A simple web page with running pace charts.
+A simple site all kind of running pace charts.
 
-[http://www.davidrobles.net/running-pace-charts/](http://www.davidrobles.net/running-pace-charts/)
+[http://www.davidrobles.net/run-pundit/](http://www.davidrobles.net/run-pundit/)
 
 ## Charts
 
