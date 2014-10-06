@@ -107,7 +107,8 @@
             str += "<td>" + formatTime(secs) + "</td>";
             str += "<td>" + formatTime(convertMiPaceToKm(secs)) + "</td>";
             for (var i = 0; i < this.distances.length; i++) {
-                str += "<td>" + distanceAndPaceToDuration(this.distances[i].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+                str += "<td>" + distanceAndPaceToDuration(this.distances[i].toMeters(),
+                        convertMiPaceToKm(secs) / 1000) + "</td>";
             }
             str += "</tr>";
         }
