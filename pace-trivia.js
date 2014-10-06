@@ -94,17 +94,18 @@
     // Table 2 //
     /////////////
 
-    var RacePredictionTable = function() {
-
+    var RacePredictionTable = function(options) {
+        this.startDuration = options.startDuration;
+        this.stopDuration = options.stopDuration;
     };
 
     RacePredictionTable.prototype.render = function() {
         var str = "<table>";
         str += "<thead>";
-        str +="<tr><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>";
+        str += "<tr><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>";
         str += "</thead>";
         str += "<tbody>";
-        for (var secs = 700; secs < 2500; secs += 5) {
+        for (var secs = this.startDuration; secs < this.stopDuration; secs += 5) {
             if (secs % 2 === 0) {
                 str += "<tr>";
             } else {
@@ -121,7 +122,11 @@
         return str;
     };
 
-    document.getElementById("race-prediction").innerHTML = new RacePredictionTable().render();
+    var racePredictionTable = new RacePredictionTable({
+        startDuration: 700,
+        stopDuration: 2500
+    });
+    document.getElementById("race-prediction").innerHTML = racePredictionTable.render();
     document.getElementById("race-times-pace").innerHTML = new RaceTimesPaceTable().render();
 
 })();
