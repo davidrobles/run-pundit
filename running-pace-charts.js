@@ -90,7 +90,6 @@
 
     RaceTimesPaceTable.prototype.render = function() {
         var str = "";
-        str += "<table>";
         str += "<thead>";
         str += "<tr><th>MM:SS/MI</th><th>MM:SS/KM</th></th>";
         for (var i = 0; i < this.distances.length; i++) {
@@ -113,8 +112,9 @@
             str += "</tr>";
         }
         str += "</tbody>";
-        str += "</table>";
-        return str;
+        var el = document.createElement("table");
+        el.innerHTML = str;
+        return el;
     };
 
     /////////////
@@ -127,7 +127,7 @@
     };
 
     RacePredictionTable.prototype.render = function() {
-        var str = "<table>";
+        var str = "";
         str += "<thead>";
         str += "<tr><th>5K</th><th>10K</th><th>HALF MARATHON</th><th>MARATHON</th></tr>";
         str += "</thead>";
@@ -145,21 +145,22 @@
             str += "</tr>";
         }
         str += "</tbody>";
-        str += "</table>";
-        return str;
+        var el = document.createElement("table");
+        el.innerHTML = str;
+        return el;
     };
 
     var racePredictionTable = new RacePredictionTable({
         startDuration: 700,
         stopDuration: 2500
     });
-    document.getElementById("race-prediction").innerHTML = racePredictionTable.render();
+    document.getElementById("race-prediction").appendChild(racePredictionTable.render());
 
     var raceTimesPaceTable = new RaceTimesPaceTable({
         startPace: 240,
         stopPace: 779,
         distances: [CD["5K"], CD["10K"], CD["HM"], CD["M"]]
     });
-    document.getElementById("race-times-pace").innerHTML = raceTimesPaceTable.render();
+    document.getElementById("race-times-pace").appendChild(raceTimesPaceTable.render());
 
 })();
