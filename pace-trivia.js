@@ -1,5 +1,11 @@
 (function() {
 
+    var Distance = function() {
+    };
+
+    Distance.prototype.toMeters = function() {
+    };
+
     function getMiles(i) {
         return i * 0.000621371192;
     }
@@ -52,7 +58,7 @@
         maxPace = 779;
 
     // Peter Riegel formula
-    var convert = function(distance1, time1, distance2) {
+    var riegelPredictor = function(distance1, time1, distance2) {
         return time1 * Math.pow(distance2 / distance1, 1.06);
     };
 
@@ -112,9 +118,9 @@
                 str += '<tr class="alternate">';
             }
             str += "<td>" + formatTime(secs) + "</td>";
-            str += "<td>" + formatTime(convert(5000, secs, CD["10K"])) + "</td>";
-            str += "<td>" + formatTime(convert(5000, secs, CD["HM"])) + "</td>";
-            str += "<td>" + formatTime(convert(5000, secs, CD["M"])) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["10K"])) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["HM"])) + "</td>";
+            str += "<td>" + formatTime(riegelPredictor(5000, secs, CD["M"])) + "</td>";
             str += "</tr>";
         }
         str += "</tbody>";
