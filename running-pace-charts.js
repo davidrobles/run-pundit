@@ -4,6 +4,10 @@ var RunPundit = RunPundit || {};
 
     var RP = RunPundit;
 
+    /////////////
+    // Classes //
+    /////////////
+
     RP.Pace = function(options) {
         this.seconds = options.seconds;
     };
@@ -17,15 +21,37 @@ var RunPundit = RunPundit || {};
         return this.len;
     };
 
-    RP.getMiles = function(i) {
-        return i * 0.000621371192;
-    }
+    ////////////////////
+    // Utilty Methods //
+    ////////////////////
 
-    RP.getMeters = function(i) {
-        return i * 1609.344;
-    }
+    RP.distanceAndPaceToDuration = function(distance, pace) {
+        return RP.formatTime(distance * pace);
+    };
 
-    // Use seconds and meters for everything
+    RP.CD = {
+        "5K": new RP.Distance({
+            name: "5K",
+            len: 5000
+        }),
+        "10K": new RP.Distance({
+            name: "10K",
+            len: 10000
+        }),
+        "HM": new RP.Distance({
+            name: "Half Marathon",
+            len: 21097.5
+        }),
+        "M": new RP.Distance({
+            name: "Marathon",
+            len: 42195
+        })
+    };
+
+    // Peter Riegel formula
+    RP.riegelPredictor = function(distance1, time1, distance2) {
+        return time1 * Math.pow(distance2 / distance1, 1.06);
+    };
 
     RP.convertKmPaceToMi = function(secondsPerKm) {
         return secondsPerKm * 1.60934;
@@ -51,36 +77,17 @@ var RunPundit = RunPundit || {};
         return hours + ":" + mins + ":" + secs;
     };
 
-    // distance in meters
-    // pace in seconds
-    RP.distanceAndPaceToDuration = function(distance, pace) {
-        return RP.formatTime(distance * pace);
-    };
+    RP.getMiles = function(i) {
+        return i * 0.000621371192;
+    }
 
-    // in meters
-    RP.CD = {
-        "5K": new RP.Distance({
-            name: "5K",
-            len: 5000
-        }),
-        "10K": new RP.Distance({
-            name: "10K",
-            len: 10000
-        }),
-        "HM": new RP.Distance({
-            name: "Half Marathon",
-            len: 21097.5
-        }),
-        "M": new RP.Distance({
-            name: "Marathon",
-            len: 42195
-        })
-    };
+    RP.getMeters = function(i) {
+        return i * 1609.344;
+    }
 
-    // Peter Riegel formula
-    RP.riegelPredictor = function(distance1, time1, distance2) {
-        return time1 * Math.pow(distance2 / distance1, 1.06);
-    };
+
+    // Use seconds and meters for everything
+
 
     /////////////
     // Table 1 //
