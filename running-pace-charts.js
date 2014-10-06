@@ -86,6 +86,7 @@
         this.distances = options.distances;
         this.startPace = options.startPace;
         this.stopPace = options.stopPace;
+        this.el = options.el || document.createElement("table");
     };
 
     RaceTimesPaceTable.prototype.render = function() {
@@ -112,9 +113,8 @@
             str += "</tr>";
         }
         str += "</tbody>";
-        var el = document.createElement("table");
-        el.innerHTML = str;
-        return el;
+        this.el.innerHTML = str;
+        return this;
     };
 
     /////////////
@@ -124,6 +124,7 @@
     var RacePredictionTable = function(options) {
         this.startDuration = options.startDuration;
         this.stopDuration = options.stopDuration;
+        this.el = options.el || document.createElement("table");
     };
 
     RacePredictionTable.prototype.render = function() {
@@ -145,22 +146,21 @@
             str += "</tr>";
         }
         str += "</tbody>";
-        var el = document.createElement("table");
-        el.innerHTML = str;
-        return el;
+        this.el.innerHTML = str;
+        return this;
     };
 
     var racePredictionTable = new RacePredictionTable({
         startDuration: 700,
         stopDuration: 2500
     });
-    document.getElementById("race-prediction").appendChild(racePredictionTable.render());
+    document.getElementById("race-prediction").appendChild(racePredictionTable.render().el);
 
     var raceTimesPaceTable = new RaceTimesPaceTable({
         startPace: 240,
         stopPace: 779,
         distances: [CD["5K"], CD["10K"], CD["HM"], CD["M"]]
     });
-    document.getElementById("race-times-pace").appendChild(raceTimesPaceTable.render());
+    document.getElementById("race-times-pace").appendChild(raceTimesPaceTable.render().el);
 
 })();
