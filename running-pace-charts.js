@@ -85,10 +85,6 @@ var RunPundit = RunPundit || {};
         return i * 1609.344;
     }
 
-
-    // Use seconds and meters for everything
-
-
     /////////////
     // Table 1 //
     /////////////
