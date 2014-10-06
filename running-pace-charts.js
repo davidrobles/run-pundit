@@ -103,10 +103,11 @@
             }
             str += "<td>" + formatTime(secs) + "</td>";
             str += "<td>" + formatTime(convertMiPaceToKm(secs)) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["5K"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["10K"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["HM"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
-            str += "<td>" + distanceAndPaceToDuration(CD["M"].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+
+            for (var i = 0; i < this.distances.length; i++) {
+                str += "<td>" + distanceAndPaceToDuration(this.distances[i].toMeters(), convertMiPaceToKm(secs) / 1000) + "</td>";
+            }
+
             str += "</tr>";
         }
         str += "</tbody>";
