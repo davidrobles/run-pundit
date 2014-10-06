@@ -18,7 +18,7 @@
         return secondsPerMi * 0.621371;
     };
 
-    var secsToMins = function(seconds) {
+    var formatTime = function(seconds) {
         var hours = Math.floor(seconds / 3600),
             mins  = Math.floor(seconds / 60) % 60,
             secs  = Math.round(seconds % 60);
@@ -37,7 +37,7 @@
     // distance in meters
     // pace in seconds
     var distanceAndPaceToDuration = function(distance, pace) {
-        return secsToMins(distance * pace);
+        return formatTime(distance * pace);
     };
 
     // in meters
@@ -77,8 +77,8 @@
             } else {
                 str += '<tr class="alternate">';
             }
-            str += "<td>" + secsToMins(secs) + "</td>";
-            str += "<td>" + secsToMins(convertMiPaceToKm(secs)) + "</td>";
+            str += "<td>" + formatTime(secs) + "</td>";
+            str += "<td>" + formatTime(convertMiPaceToKm(secs)) + "</td>";
             str += "<td>" + distanceAndPaceToDuration(CD["5K"], convertMiPaceToKm(secs) / 1000) + "</td>";
             str += "<td>" + distanceAndPaceToDuration(CD["10K"], convertMiPaceToKm(secs) / 1000) + "</td>";
             str += "<td>" + distanceAndPaceToDuration(CD["HM"], convertMiPaceToKm(secs) / 1000) + "</td>";
@@ -110,10 +110,10 @@
             } else {
                 str += '<tr class="alternate">';
             }
-            str += "<td>" + secsToMins(secs) + "</td>";
-            str += "<td>" + secsToMins(convert(5000, secs, CD["10K"])) + "</td>";
-            str += "<td>" + secsToMins(convert(5000, secs, CD["HM"])) + "</td>";
-            str += "<td>" + secsToMins(convert(5000, secs, CD["M"])) + "</td>";
+            str += "<td>" + formatTime(secs) + "</td>";
+            str += "<td>" + formatTime(convert(5000, secs, CD["10K"])) + "</td>";
+            str += "<td>" + formatTime(convert(5000, secs, CD["HM"])) + "</td>";
+            str += "<td>" + formatTime(convert(5000, secs, CD["M"])) + "</td>";
             str += "</tr>";
         }
         str += "</tbody>";
