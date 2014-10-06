@@ -1,5 +1,9 @@
 (function() {
 
+    var Pace = function(options) {
+        this.seconds = options.seconds;
+    };
+
     var Distance = function(options) {
         this.name = options.name;
         this.len = options.len;
@@ -69,9 +73,6 @@
         })
     };
 
-    var minPace = 240,
-        maxPace = 779;
-
     // Peter Riegel formula
     var riegelPredictor = function(distance1, time1, distance2) {
         return time1 * Math.pow(distance2 / distance1, 1.06);
@@ -82,7 +83,9 @@
     /////////////
 
     var RaceTimesPaceTable = function(options) {
-        this.distances = options.distances
+        this.distances = options.distances;
+        this.startPace = options.startPace;
+        this.stopPace = options.stopPace;
     };
 
     RaceTimesPaceTable.prototype.render = function() {
@@ -95,7 +98,7 @@
         }
         str += "</thead>";
         str += "<tbody>";
-        for (var secs = minPace; secs <= maxPace; secs++) {
+        for (var secs = this.startPace; secs <= this.stopPace; secs++) {
             if (secs % 2 === 0) {
                 str += "<tr>";
             } else {
@@ -152,6 +155,8 @@
     document.getElementById("race-prediction").innerHTML = racePredictionTable.render();
 
     var raceTimesPaceTable = new RaceTimesPaceTable({
+        startPace: 240,
+        stopPace: 779,
         distances: [CD["5K"], CD["10K"], CD["HM"], CD["M"]]
     });
     document.getElementById("race-times-pace").innerHTML = raceTimesPaceTable.render();
